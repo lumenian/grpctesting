@@ -3,15 +3,16 @@
 SHELL := /bin/bash
 
 gen:
-	protoc --go_out=go-src/pb --go_opt=paths=import \
-		--go-grpc_out=go-src/pb --go-grpc_opt=paths=import \
+	protoc --go_out=src-go/pb --go_opt=paths=import \
+		--go-grpc_out=src-go/pb --go-grpc_opt=paths=import \
 		proto/users.proto
 
 server:
-	go run go-src/cmd/main.go
+	cd src-go; \
+	go run cmd/main.go
 
 clean:
-	rm go-src/pb/*.go
+	rm src-go/pb/*.go
 
 tidy:
 	go mod tidy
